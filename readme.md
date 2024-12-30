@@ -63,6 +63,8 @@ docker-compose up --build
 
 The development server will be accessible at http://localhost:8000
 
+Note: Unpon building the application 20 users, 1000 products and 2000 alerts are preloaded.
+
 
 Endpoints
 

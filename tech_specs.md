@@ -18,3 +18,4 @@ Para todas las funciones se especifican los tipos de los parámetros y los resul
 Varios métodos se incluyen directamente en los models y serializers. El resto en services y Selectorspara evitar importaciones circulares y mejorar la organización del código. 
 Cuando es posible se utiliza select_related y prefetch_related para optimizar las consultas a la base de datos y la performance de la aplicacion.
 Se agrego paginacion y posibilidad de filtrados para los endpoints que lo requieren.
+A fin de contar con informacion de prueba, al momento de buildear la aplicacion, se crean 20 usuarios, 1000 productos y 2000 alertas.
