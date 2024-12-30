@@ -2,6 +2,7 @@ import requests
 from alerts.models import Alert
 from alerts.selectors import get_alert_status
 from alerts.serializers import AlertSerializer
+from products.models import Product
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -12,6 +13,32 @@ from rest_framework.pagination import PageNumberPagination
 class AlertsAPIView(APIView):
 
     permission_classes = [IsAuthenticated]
+
+    def post(self, request, format=None):
+
+        product_id = request.data.get('product_id')
+        days_before_expiration_to_trigger = request.data.get('days_before_expiration_to_trigger')
+
+        if not product_id or not days_before_expiration_to_trigger:
+            return Response(
+                {'error': "'product_id' and 'days_before_expiration_to_trigger' are required."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            product = Product.objects.get(id=product_id)
+
+        except Product.DoesNotExist:
+            return Response({'error': 'Product not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        alert = Alert.objects.create(
+            product=product,
+            days_before_expiration_to_trigger=days_before_expiration_to_trigger
+        )
+
+        serializer = AlertSerializer(alert)
+        
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def get(self, request, pk=None, format=None):
 

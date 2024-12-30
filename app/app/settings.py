@@ -154,10 +154,10 @@ CELERY_TIMEZONE = 'UTC'
 CELERY_BEAT_SCHEDULE = {
     'trigger-alerts-information': {
         'task': 'alerts.tasks.alerts_information',
-        'schedule': crontab(hour='*', minute='*'),
+        'schedule': crontab(hour=19, minute=00),
     },
     'trigger-alerts-notifications': {
         'task': 'alerts.tasks.alerts_notifications',
-        'schedule': crontab(hour='*', minute='*'),
+        'schedule': crontab(hour=20, minute=00),
     },
 }
