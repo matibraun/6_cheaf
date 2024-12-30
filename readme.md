@@ -3,7 +3,7 @@ Inventory App README
 
 Inventory Management Application
 
-This application helps manage an inventory system, tracking product expiration dates, and notifying users about products that are near their expiration date. It includes the ability to set alerts, and it features a cron job to notify users when the alert conditions are met.
+This application helps manage an inventory system, tracking product expiration dates, and notifying users about products that are near their expiration date. It includes the ability to set alerts, and it features a cron job to notify users when the alert conditions are met, and display all the active alerts.
 
 
 Table of Contents
@@ -25,6 +25,7 @@ Before running the application, ensure you have the following tools installed.
 
 Docker
 Docker Compose
+PostgreSQL
 
 The application uses PostgreSQL as the database. Ensure you set up PostgreSQL with the following credentials:
 
@@ -161,5 +162,3 @@ The application runs the following scheduled tasks every day:
 
 7 PM: Displays all products with active alerts.
 8 PM: Sends an email to each user for products with alerts triggered for the current date (mocked).
-
-These tasks help ensure that users are notified in a timely manner about the products in their inventory that are approaching expiration.

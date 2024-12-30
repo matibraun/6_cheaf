@@ -14,7 +14,7 @@ def preload_products_and_alerts(apps, schema_editor):
     if not users:
         raise Exception("No users available to assign to products.")
 
-    product_names = [f"Product {i}" for i in range(1, 11)]
+    product_names = [f"Product {i}" for i in range(1, 1001)]
 
     products = []
     alerts = []
