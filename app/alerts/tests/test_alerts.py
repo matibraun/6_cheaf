@@ -8,14 +8,11 @@ from datetime import date, timedelta
 class AlertsAPITestCase(APITestCase):
 
     def setUp(self):
-        # Create a user
         self.user = User.objects.create_user(username='testuser', password='password123')
         self.client.force_authenticate(user=self.user)
 
-        # Authenticate the user
         self.client.login(username='testuser', password='password123')
 
-        # Create a product
         self.product = Product.objects.create(
             name="Test Product",
             description="Test Description",
@@ -24,7 +21,6 @@ class AlertsAPITestCase(APITestCase):
             user=self.user
         )
 
-        # Create alerts
         self.alert1 = Alert.objects.create(
             product=self.product,
             days_before_expiration_to_trigger=5
@@ -72,7 +68,6 @@ class AlertsAPITestCase(APITestCase):
         self.assertGreater(len(response.data['results']), 0)
 
     def test_filter_alerts_by_status_expired(self):
-        # Simulate an expired alert by modifying the product's expiration date
         self.product.expiration_date = date.today() - timedelta(days=1)
         self.product.save()
 

@@ -20,7 +20,6 @@ class CustomLoginViewTests(APITestCase):
         self.assertIn('username', response.data)
         self.assertIn('email', response.data)
 
-        # Check if the token is created
         token = Token.objects.get(user=self.user)
         self.assertEqual(response.data['token'], token.key)
 

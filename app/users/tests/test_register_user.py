@@ -16,17 +16,16 @@ class RegisterUserViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertIn('username', response.data)
         self.assertIn('email', response.data)
-        self.assertNotIn('password', response.data)  # Password should not be in the response
+        self.assertNotIn('password', response.data)
 
-        # Check user creation
         user = User.objects.get(username='testuser')
         self.assertTrue(user.check_password('password123'))
 
     def test_register_user_invalid_data(self):
         payload = {
-            'username': '',  # Empty username
+            'username': '',
             'password': 'password123',
-            'email': 'invalid-email',  # Invalid email format
+            'email': 'invalid-email',
         }
         response = self.client.post('/users/register/', payload)
 
