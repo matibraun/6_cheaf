@@ -7,7 +7,7 @@ def alerts_information():
 
     products_with_active_alerts = Product.get_products_with_active_alerts()
 
-    display_alerts(products_with_active_alerts)
+    display_alerts(products=products_with_active_alerts)
    
     return "Alerts information triggered successfully."
 
@@ -17,6 +17,6 @@ def alerts_notifications():
 
     products_with_alerts_to_be_triggered_today = Product.get_products_with_alerts_to_be_triggered_today()
 
-    notify_alerts(products_with_alerts_to_be_triggered_today)
+    notify_alerts(products=products_with_alerts_to_be_triggered_today)
 
     return "Alerts notification triggered successfully."

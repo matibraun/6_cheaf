@@ -1,13 +1,16 @@
 
+from typing import List
+
+from products.models import Product
 from .selectors import get_alert_status
 from .models import Alert
 
 
-def create_alert(product_id, days_before_expiration_to_trigger):
+def create_alert(product_id: int, days_before_expiration_to_trigger: int) -> None:
 
     Alert.objects.create(product_id=product_id, days_before_expiration_to_trigger=days_before_expiration_to_trigger)
 
-def display_alerts(products):
+def display_alerts(products: List[Product]) -> None:
 
     for product in products:
     
@@ -22,10 +25,10 @@ def display_alerts(products):
             print(
                 f"Alert creted at {alert.created_at}\n"
                 f"Set to be triggered {alert.days_before_expiration_to_trigger} days before expiration.\n"
-                f"Status: {get_alert_status(product.expiration_date, alert.days_before_expiration_to_trigger)}\n"
+                f"Status: {get_alert_status(product_expiration_date=product.expiration_date, days_before_expiration_to_trigger=alert.days_before_expiration_to_trigger)}\n"
             )
 
-def notify_alerts(products):
+def notify_alerts(products: List[Product]) -> None:
 
     for product in products:
 
