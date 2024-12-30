@@ -24,5 +24,3 @@ venv/
 *.sqlite3
 *.db
 
-# Django migrations
-migrations/

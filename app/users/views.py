@@ -8,36 +8,42 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 
 class RegisterUserView(APIView):
+
     permission_classes = [AllowAny]
 
     def post(self, request):
+
         serializer = UserSerializer(data=request.data)
+        
         if serializer.is_valid():
+        
             user = serializer.save()
+        
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CustomLoginView(ObtainAuthToken):
+
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
-        # First, check if user exists
+
         username = request.data.get('username')
         password = request.data.get('password')
         user = User.objects.filter(username=username).first()
 
-
-        # If user exists, authenticate them
         if user.check_password(password):
-            # Use the default ObtainAuthToken to authenticate the user
+
             response = super().post(request, *args, **kwargs)
             
-            # Customize the response to include additional user information
             return Response({
                 'token': response.data['token'],
                 'username': user.username,
                 'email': user.email,
             })
+
         else:
+
             return Response({'detail': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)

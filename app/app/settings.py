@@ -151,7 +151,6 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
 
-# Periodic tasks
 CELERY_BEAT_SCHEDULE = {
     'trigger-alerts-information': {
         'task': 'alerts.tasks.alerts_information',
